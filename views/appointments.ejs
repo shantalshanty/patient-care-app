@@ -1,0 +1,218 @@
+<%- include('partials/header') %>
+<%- include('partials/navbar', { user: user }) %>
+
+<div class="dashboard-wrapper">
+    <div class="container py-5">
+
+        <div class="dashboard-header mb-4">
+            <div>
+                <h2 class="dashboard-title">Appointments</h2>
+                <p class="dashboard-subtitle">
+                    <% if (user.role === 'doctor') { %>
+                        Review and manage all appointment records.
+                    <% } else { %>
+                        Book and track your appointments.
+                    <% } %>
+                </p>
+            </div>
+        </div>
+
+        <div class="row g-4">
+
+            <div class="col-lg-4">
+                <% if (user.role === 'patient') { %>
+                    <div class="main-card p-4">
+                        <h4 class="mb-3">Book Appointment</h4>
+                        <form method="POST" action="/appointments/book">
+                            <div class="mb-3">
+                                <label class="form-label">Select Date</label>
+                                <input type="date" name="date" class="form-control custom-input" required />
+                            </div>
+                            <button class="btn btn-success w-100">Book Appointment</button>
+                        </form>
+                    </div>
+                <% } else { %>
+                    <div class="main-card p-4">
+                        <h4 class="mb-3">Doctor Panel</h4>
+                        <p class="text-muted">
+                            You can review all appointment requests and update their status.
+                        </p>
+
+                        <div class="d-grid gap-3 mt-4">
+                            <div class="stat-card">
+                                <div class="stat-icon bg-soft-blue">
+                                    <i class="bi bi-calendar-check"></i>
+                                </div>
+                                <div>
+                                    <h6>Visible Records</h6>
+                                    <p><%= appointments.length %></p>
+                                </div>
+                            </div>
+
+                            <a href="/dashboard" class="btn btn-primary">Back to Dashboard</a>
+                        </div>
+                    </div>
+                <% } %>
+            </div>
+
+            <div class="col-lg-8">
+                <div class="main-card p-4">
+
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+                        <h4 class="mb-0">
+                            <% if (user.role === 'doctor') { %>
+                                All Appointments
+                            <% } else { %>
+                                My Appointments
+                            <% } %>
+                        </h4>
+                        <span class="table-count"><%= appointments.length %> on this page</span>
+                    </div>
+
+                    <div class="main-card p-4 mb-4">
+                        <form method="GET" action="/appointments">
+                            <div class="row g-3">
+
+                                <div class="col-md-4">
+                                    <input
+                                        type="text"
+                                        name="search"
+                                        placeholder="Search patient name"
+                                        value="<%= typeof filters !== 'undefined' ? (filters.search || '') : '' %>"
+                                        class="form-control custom-input"
+                                    >
+                                </div>
+
+                                <div class="col-md-3">
+                                    <select name="status" class="form-select custom-select">
+                                        <option value="All" <%= (typeof filters !== 'undefined' && filters.status === 'All') || typeof filters === 'undefined' || !filters.status ? 'selected' : '' %>>All Status</option>
+                                        <option value="Pending" <%= typeof filters !== 'undefined' && filters.status === 'Pending' ? 'selected' : '' %>>Pending</option>
+                                        <option value="Approved" <%= typeof filters !== 'undefined' && filters.status === 'Approved' ? 'selected' : '' %>>Approved</option>
+                                        <option value="Rejected" <%= typeof filters !== 'undefined' && filters.status === 'Rejected' ? 'selected' : '' %>>Rejected</option>
+                                    </select>
+                                </div>
+
+                                <div class="col-md-3">
+                                    <input
+                                        type="date"
+                                        name="date"
+                                        value="<%= typeof filters !== 'undefined' && filters.date ? filters.date : '' %>"
+                                        class="form-control custom-input"
+                                    >
+                                </div>
+
+                                <div class="col-md-2 d-grid">
+                                    <button class="btn btn-primary" type="submit">Filter</button>
+                                </div>
+
+                            </div>
+
+                            <div class="mt-3">
+                                <a href="/appointments" class="btn btn-outline-secondary">Clear</a>
+                            </div>
+                        </form>
+                    </div>
+
+                    <div class="table-responsive">
+                        <table class="table custom-table align-middle">
+                            <thead>
+                                <tr>
+                                    <th>Patient</th>
+                                    <th>Date</th>
+                                    <th>Status</th>
+                                    <% if (user.role === 'doctor') { %>
+                                        <th>Action</th>
+                                    <% } %>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <% if (appointments.length === 0) { %>
+                                    <tr>
+                                        <td colspan="<%= user.role === 'doctor' ? 4 : 3 %>" class="text-center text-muted py-4">
+                                            No appointments found.
+                                        </td>
+                                    </tr>
+                                <% } %>
+
+                                <% appointments.forEach(app => { %>
+                                    <tr>
+                                        <td>
+                                            <div class="table-user">
+                                                <div class="table-user-icon">
+                                                    <i class="bi bi-person"></i>
+                                                </div>
+                                                <div>
+                                                    <div class="fw-semibold"><%= app.patientId.name %></div>
+                                                    <small class="text-muted"><%= app.patientId.email %></small>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td><%= app.date %></td>
+                                        <td>
+                                            <% if (app.status === 'Approved') { %>
+                                                <span class="status-badge status-approved">Approved</span>
+                                            <% } else if (app.status === 'Rejected') { %>
+                                                <span class="status-badge status-rejected">Rejected</span>
+                                            <% } else { %>
+                                                <span class="status-badge status-pending">Pending</span>
+                                            <% } %>
+                                        </td>
+
+                                        <% if (user.role === 'doctor') { %>
+                                            <td>
+                                                <form method="POST" action="/appointments/update" class="d-flex gap-2">
+                                                    <input type="hidden" name="id" value="<%= app._id %>" />
+                                                    <select name="status" class="form-select form-select-sm custom-select">
+                                                        <option value="Pending">Pending</option>
+                                                        <option value="Approved">Approved</option>
+                                                        <option value="Rejected">Rejected</option>
+                                                    </select>
+                                                    <button class="btn btn-sm btn-primary">Update</button>
+                                                </form>
+                                            </td>
+                                        <% } %>
+                                    </tr>
+                                <% }) %>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <% if (typeof totalPages !== 'undefined' && totalPages > 1) { %>
+                        <nav class="mt-4">
+                            <ul class="pagination justify-content-center">
+
+                                <li class="page-item <%= (typeof currentPage !== 'undefined' && currentPage === 1) ? 'disabled' : '' %>">
+                                    <a class="page-link"
+                                       href="/appointments?page=<%= (typeof currentPage !== 'undefined' ? currentPage - 1 : 1) %>&search=<%= typeof filters !== 'undefined' ? (filters.search || '') : '' %>&status=<%= typeof filters !== 'undefined' ? (filters.status || '') : '' %>&date=<%= typeof filters !== 'undefined' ? (filters.date || '') : '' %>">
+                                        Previous
+                                    </a>
+                                </li>
+
+                                <% for (let i = 1; i <= totalPages; i++) { %>
+                                    <li class="page-item <%= (typeof currentPage !== 'undefined' && currentPage === i) ? 'active' : '' %>">
+                                        <a class="page-link"
+                                           href="/appointments?page=<%= i %>&search=<%= typeof filters !== 'undefined' ? (filters.search || '') : '' %>&status=<%= typeof filters !== 'undefined' ? (filters.status || '') : '' %>&date=<%= typeof filters !== 'undefined' ? (filters.date || '') : '' %>">
+                                            <%= i %>
+                                        </a>
+                                    </li>
+                                <% } %>
+
+                                <li class="page-item <%= (typeof currentPage !== 'undefined' && currentPage === totalPages) ? 'disabled' : '' %>">
+                                    <a class="page-link"
+                                       href="/appointments?page=<%= (typeof currentPage !== 'undefined' ? currentPage + 1 : 1) %>&search=<%= typeof filters !== 'undefined' ? (filters.search || '') : '' %>&status=<%= typeof filters !== 'undefined' ? (filters.status || '') : '' %>&date=<%= typeof filters !== 'undefined' ? (filters.date || '') : '' %>">
+                                        Next
+                                    </a>
+                                </li>
+
+                            </ul>
+                        </nav>
+                    <% } %>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<%- include('partials/footer') %>

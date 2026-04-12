@@ -1,0 +1,163 @@
+<%- include('partials/header') %>
+<%- include('partials/navbar', { user: user }) %>
+
+<div class="dashboard-wrapper">
+    <div class="container py-5">
+
+        <div class="dashboard-header mb-4">
+            <div>
+                <h2 class="dashboard-title">
+                    <% if (user.role === 'doctor') { %>
+                        Doctor Dashboard
+                    <% } else { %>
+                        Patient Dashboard
+                    <% } %>
+                </h2>
+                <p class="dashboard-subtitle">
+                    Logged in as <strong><%= user.role %></strong>
+                </p>
+            </div>
+
+            <div class="profile-pill">
+                <i class="bi bi-person-circle me-2"></i>
+                <span><%= user.role %></span>
+            </div>
+        </div>
+
+        <div class="row g-4 mb-4">
+            <div class="col-md-3">
+                <div class="stat-card">
+                    <div class="stat-icon bg-soft-blue">
+                        <i class="bi bi-calendar2-check"></i>
+                    </div>
+                    <div>
+                        <h6>Total Appointments</h6>
+                        <p><%= stats.totalAppointments %></p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-3">
+                <div class="stat-card">
+                    <div class="stat-icon bg-soft-yellow">
+                        <i class="bi bi-hourglass-split"></i>
+                    </div>
+                    <div>
+                        <h6>Pending</h6>
+                        <p><%= stats.pendingAppointments %></p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-3">
+                <div class="stat-card">
+                    <div class="stat-icon bg-soft-green">
+                        <i class="bi bi-check-circle"></i>
+                    </div>
+                    <div>
+                        <h6>Approved</h6>
+                        <p><%= stats.approvedAppointments %></p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-3">
+                <div class="stat-card">
+                    <div class="stat-icon bg-soft-red">
+                        <i class="bi bi-x-circle"></i>
+                    </div>
+                    <div>
+                        <h6>Rejected</h6>
+                        <p><%= stats.rejectedAppointments %></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row g-4">
+            <div class="col-lg-8">
+                <div class="main-card p-4 h-100">
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+                        <h4 class="mb-0">Recent Appointments</h4>
+                        <a href="/appointments" class="btn btn-primary btn-sm">View All</a>
+                    </div>
+
+                    <div class="table-responsive">
+                        <table class="table custom-table align-middle">
+                            <thead>
+                                <tr>
+                                    <th>Patient</th>
+                                    <th>Date</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <% if (recentAppointments.length === 0) { %>
+                                    <tr>
+                                        <td colspan="3" class="text-center text-muted py-4">
+                                            No recent appointments yet.
+                                        </td>
+                                    </tr>
+                                <% } %>
+
+                                <% recentAppointments.forEach(app => { %>
+                                    <tr>
+                                        <td>
+                                            <div class="table-user">
+                                                <div class="table-user-icon">
+                                                    <i class="bi bi-person"></i>
+                                                </div>
+                                                <div>
+                                                    <div class="fw-semibold"><%= app.patientId.name %></div>
+                                                    <small class="text-muted"><%= app.patientId.email %></small>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td><%= app.date %></td>
+                                        <td>
+                                            <% if (app.status === 'Approved') { %>
+                                                <span class="status-badge status-approved">Approved</span>
+                                            <% } else if (app.status === 'Rejected') { %>
+                                                <span class="status-badge status-rejected">Rejected</span>
+                                            <% } else { %>
+                                                <span class="status-badge status-pending">Pending</span>
+                                            <% } %>
+                                        </td>
+                                    </tr>
+                                <% }) %>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-4">
+                <div class="main-card p-4 mb-4">
+                    <h4 class="mb-3">Quick Actions</h4>
+                    <div class="d-grid gap-3">
+                        <a href="/appointments" class="btn btn-primary">Manage Appointments</a>
+
+                        <% if (user.role === 'doctor') { %>
+                            <a href="/doctor" class="btn btn-success">Doctor Panel</a>
+                        <% } %>
+
+                        <a href="/logout" class="btn btn-danger">Logout</a>
+                    </div>
+                </div>
+
+                <div class="main-card p-4">
+                    <h4 class="mb-3">Health Tips</h4>
+                    <ul class="tips-list">
+                        <li>Drink enough water daily</li>
+                        <li>Track appointment dates carefully</li>
+                        <li>Maintain a healthy sleep schedule</li>
+                        <li>Exercise regularly</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<%- include('partials/footer') %>
