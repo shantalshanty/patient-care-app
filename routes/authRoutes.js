@@ -13,7 +13,7 @@ router.post('/login', authController.login);
 // Logout
 router.get('/logout', (req, res) => {
     res.clearCookie('token');
-    res.redirect('/login');
+    res.redirect('/');
 });
 
 module.exports = router;
