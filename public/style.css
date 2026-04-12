@@ -400,6 +400,7 @@ body {
     color: white;
 }
 
+
 .logout-link {
     margin-top: 10px;
     background: rgba(239, 68, 68, 0.15);
@@ -552,6 +553,106 @@ body {
         grid-template-columns: 1fr;
     }
 }
+
+@media (max-width: 991px) {
+    .app-layout {
+        flex-direction: column;
+    }
+
+    .sidebar {
+        width: 100%;
+        height: auto;
+        position: relative;
+        display: flex;
+        flex-direction: row;
+        overflow-x: auto;
+        gap: 10px;
+    }
+
+    .sidebar-nav {
+        flex-direction: row;
+        width: 100%;
+        justify-content: space-around;
+    }
+
+    .sidebar-link {
+        padding: 10px;
+        font-size: 0.85rem;
+        white-space: nowrap;
+    }
+}
+
+@media (max-width: 768px) {
+
+    .hero-title {
+        font-size: 2rem;
+        text-align: center;
+    }
+
+    .hero-text {
+        text-align: center;
+    }
+
+    .hero-stats {
+        flex-direction: column;
+    }
+
+    .hero-image-inner {
+        grid-template-columns: 1fr;
+    }
+
+    .landing-page .row {
+        text-align: center;
+    }
+
+    .btn-lg {
+        width: 100%;
+    }
+}
+
+@media (max-width: 768px) {
+    .stat-card {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .action-card {
+        flex-direction: column;
+    }
+
+    .dashboard-header {
+        flex-direction: column;
+        gap: 10px;
+    }
+}
+
+.table {
+    font-size: 0.9rem;
+}
+
+@media (max-width: 768px) {
+    .table {
+        font-size: 0.8rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .container {
+        padding-left: 15px;
+        padding-right: 15px;
+    }
+}
+
+@media (max-width: 768px) {
+    .sidebar-link {
+        font-size: 0;
+    }
+
+    .sidebar-link i {
+        font-size: 1.2rem;
+    }
+}
+
 .pagination .page-link {
     border-radius: 10px;
     margin: 0 4px;
