@@ -1,55 +1,59 @@
 <%- include('partials/header') %>
 
-<div class="hero-section">
-    <div class="container">
+<div class="landing-page">
+    <div class="container py-5">
+
         <div class="row align-items-center min-vh-100">
             <div class="col-lg-6">
                 <span class="badge-soft mb-3">Smart Healthcare Platform</span>
-                <h1 class="hero-title">Patient Care System</h1>
+                <h1 class="hero-title">Modern Patient Care System</h1>
                 <p class="hero-text">
-                    A modern healthcare web application for managing patient records,
-                    appointments, and secure access in one place.
+                    A secure healthcare web app for managing patient records,
+                    appointments, and doctor workflows in one place.
                 </p>
 
-                <div class="mt-4">
-                    <a href="/register" class="btn btn-primary btn-lg me-3">Get Started</a>
+                <div class="mt-4 d-flex flex-wrap gap-3">
+                    <a href="/register" class="btn btn-primary btn-lg">Get Started</a>
                     <a href="/login" class="btn btn-outline-primary btn-lg">Login</a>
+                </div>
+
+                <div class="hero-stats mt-5">
+                    <div class="hero-stat-card">
+                        <h4>Secure Access</h4>
+                        <p>JWT authentication with role-based access control.</p>
+                    </div>
+                    <div class="hero-stat-card">
+                        <h4>Appointments</h4>
+                        <p>Book, manage, and review appointments easily.</p>
+                    </div>
                 </div>
             </div>
 
-            <div class="col-lg-6">
-                <div class="hero-card">
-                    <div class="row g-3">
-                        <div class="col-6">
-                            <div class="mini-card">
-                                <div class="icon-circle"><i class="bi bi-person-plus"></i></div>
-                                <h5>Patient Profiles</h5>
-                                <p>Register and manage patient information securely.</p>
-                            </div>
+            <div class="col-lg-6 mt-5 mt-lg-0">
+                <div class="hero-image-card">
+                    <div class="hero-image-inner">
+                        <div class="feature-box">
+                            <i class="bi bi-person-badge"></i>
+                            <h5>Patient Records</h5>
+                            <p>Track and review patient information.</p>
                         </div>
 
-                        <div class="col-6">
-                            <div class="mini-card">
-                                <div class="icon-circle"><i class="bi bi-calendar-check"></i></div>
-                                <h5>Appointments</h5>
-                                <p>Book and track appointments with ease.</p>
-                            </div>
+                        <div class="feature-box">
+                            <i class="bi bi-calendar-check"></i>
+                            <h5>Appointment Workflow</h5>
+                            <p>Approve and manage care schedules.</p>
                         </div>
 
-                        <div class="col-6">
-                            <div class="mini-card">
-                                <div class="icon-circle"><i class="bi bi-shield-lock"></i></div>
-                                <h5>Secure Access</h5>
-                                <p>Role-based authentication for safer access control.</p>
-                            </div>
+                        <div class="feature-box">
+                            <i class="bi bi-bar-chart-line"></i>
+                            <h5>Dashboard Insights</h5>
+                            <p>Monitor appointments and activity at a glance.</p>
                         </div>
 
-                        <div class="col-6">
-                            <div class="mini-card">
-                                <div class="icon-circle"><i class="bi bi-clipboard2-pulse"></i></div>
-                                <h5>Care Dashboard</h5>
-                                <p>Clean and simple interface for healthcare workflows.</p>
-                            </div>
+                        <div class="feature-box">
+                            <i class="bi bi-shield-lock"></i>
+                            <h5>Protected Access</h5>
+                            <p>Different views for doctors and patients.</p>
                         </div>
                     </div>
                 </div>
@@ -58,36 +62,40 @@
 
         <section class="py-5">
             <div class="text-center mb-5">
-                <h2 class="section-title">Core Features</h2>
-                <p class="section-text">Built to demonstrate practical healthcare workflow management.</p>
+                <h2 class="section-title">Why This App Stands Out</h2>
+                <p class="section-text">
+                    Built as a portfolio-ready healthcare platform with security,
+                    usability, and workflow management in mind.
+                </p>
             </div>
 
             <div class="row g-4">
                 <div class="col-md-4">
                     <div class="feature-card">
-                        <i class="bi bi-person-badge feature-icon"></i>
-                        <h4>Patient Management</h4>
-                        <p>Create patient accounts and manage access securely through the platform.</p>
+                        <i class="bi bi-people feature-icon"></i>
+                        <h4>Role-Based Access</h4>
+                        <p>Separate patient and doctor experiences for a more realistic workflow.</p>
                     </div>
                 </div>
 
                 <div class="col-md-4">
                     <div class="feature-card">
-                        <i class="bi bi-calendar2-week feature-icon"></i>
-                        <h4>Appointment Booking</h4>
-                        <p>Allow patients to book appointments and doctors to review them easily.</p>
+                        <i class="bi bi-journal-medical feature-icon"></i>
+                        <h4>Patient Care Workflow</h4>
+                        <p>Book appointments, review requests, and manage records in one app.</p>
                     </div>
                 </div>
 
                 <div class="col-md-4">
                     <div class="feature-card">
-                        <i class="bi bi-lock feature-icon"></i>
-                        <h4>Role-Based Security</h4>
-                        <p>Protect routes using JWT authentication and authorization middleware.</p>
+                        <i class="bi bi-cloud-check feature-icon"></i>
+                        <h4>Cloud Deployed</h4>
+                        <p>Hosted online with a cloud database for real-world portfolio demonstration.</p>
                     </div>
                 </div>
             </div>
         </section>
+
     </div>
 </div>
 
