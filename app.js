@@ -24,11 +24,13 @@ const authRoutes = require('./routes/authRoutes');
 const dashboardRoutes = require('./routes/dashboardRoutes');
 const appointmentRoutes = require('./routes/appointmentRoutes');
 const patientRoutes = require('./routes/patientRoutes');
+const triageRoutes = require('./routes/triageRoutes');
 
 app.use('/', appointmentRoutes);
 app.use('/', dashboardRoutes);
 app.use('/', authRoutes);
 app.use('/', patientRoutes);
+app.use('/', triageRoutes);
 
 app.get('/', (req, res) => {
     res.render('index', { title: 'Patient Care System' });

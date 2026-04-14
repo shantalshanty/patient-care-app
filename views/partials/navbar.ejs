@@ -23,6 +23,22 @@
                 </a>
             <% } %>
 
+            <% if (user && user.role === 'patient') { %>
+               <a href="/triage" class="sidebar-link">
+               <i class="bi bi-chat-dots me-2"></i> Triage Assistant
+               </a>
+
+               <a href="/triage-history" class="sidebar-link">
+               <i class="bi bi-clock-history me-2"></i> My Triage
+               </a>
+            <% } %>
+
+            <% if (user && user.role === 'doctor') { %>
+               <a href="/doctor-triage" class="sidebar-link">
+               <i class="bi bi-clipboard2-pulse me-2"></i> Triage Review
+               </a>
+            <% } %>
+
             <a href="/logout" class="sidebar-link logout-link">
                 <i class="bi bi-box-arrow-right me-2"></i> Logout
             </a>

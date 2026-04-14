@@ -1,0 +1,54 @@
+<%- include('partials/header') %>
+<%- include('partials/navbar', { user: user }) %>
+
+<div class="dashboard-wrapper">
+    <div class="container py-5">
+        <div class="dashboard-header mb-4">
+            <div>
+                <h2 class="dashboard-title">My Triage History</h2>
+                <p class="dashboard-subtitle">Your submitted triage reports.</p>
+            </div>
+        </div>
+
+        <div class="main-card p-4">
+            <div class="table-responsive">
+                <table class="table custom-table align-middle">
+                    <thead>
+                        <tr>
+                            <th>Symptom</th>
+                            <th>Urgency</th>
+                            <th>Summary</th>
+                            <th>Date</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% if (triageRecords.length === 0) { %>
+                            <tr>
+                                <td colspan="4" class="text-center text-muted py-4">No triage records found.</td>
+                            </tr>
+                        <% } %>
+
+                        <% triageRecords.forEach(record => { %>
+                            <tr>
+                                <td><%= record.mainSymptom %></td>
+                                <td>
+                                    <% if (record.urgency === 'High') { %>
+                                        <span class="status-badge status-rejected">High</span>
+                                    <% } else if (record.urgency === 'Medium') { %>
+                                        <span class="status-badge status-pending">Medium</span>
+                                    <% } else { %>
+                                        <span class="status-badge status-approved">Low</span>
+                                    <% } %>
+                                </td>
+                                <td><%= record.summary %></td>
+                                <td><%= record.createdAt.toDateString() %></td>
+                            </tr>
+                        <% }) %>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<%- include('partials/footer') %>

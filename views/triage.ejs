@@ -1,0 +1,52 @@
+<%- include('partials/header') %>
+<%- include('partials/navbar', { user: user }) %>
+
+<div class="dashboard-wrapper">
+    <div class="container py-5">
+        <div class="dashboard-header mb-4">
+            <div>
+                <h2 class="dashboard-title">Triage Assistant</h2>
+                <p class="dashboard-subtitle">Answer a few questions so the doctor can review your symptoms.</p>
+            </div>
+        </div>
+
+        <div class="main-card p-4">
+            <form method="POST" action="/triage">
+                <div class="mb-3">
+                    <label class="form-label">Main Symptom</label>
+                    <input type="text" name="mainSymptom" class="form-control custom-input" required>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">How long have you had this symptom?</label>
+                    <input type="text" name="duration" class="form-control custom-input" placeholder="e.g. 2 days" required>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Pain Level (0-10)</label>
+                    <input type="number" name="painLevel" min="0" max="10" class="form-control custom-input" required>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Do you have difficulty breathing?</label>
+                    <select name="breathingDifficulty" class="form-select custom-select" required>
+                        <option value="no">No</option>
+                        <option value="yes">Yes</option>
+                    </select>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Do you have a fever?</label>
+                    <select name="fever" class="form-select custom-select" required>
+                        <option value="no">No</option>
+                        <option value="yes">Yes</option>
+                    </select>
+                </div>
+
+                <button type="submit" class="btn btn-primary">Submit Triage</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<%- include('partials/footer') %>
