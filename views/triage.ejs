@@ -10,40 +10,72 @@
             </div>
         </div>
 
-        <div class="main-card p-4">
-            <form method="POST" action="/triage">
-                <div class="mb-3">
-                    <label class="form-label">Main Symptom</label>
-                    <input type="text" name="mainSymptom" class="form-control custom-input" required>
+        <div class="triage-chat-card">
+            <div class="chat-header">
+                <div class="chat-avatar">
+                    <i class="bi bi-robot"></i>
+                </div>
+                <div>
+                    <h4 class="mb-0">CareBot</h4>
+                    <small class="text-muted">Patient triage assistant</small>
+                </div>
+            </div>
+
+            <form method="POST" action="/triage" class="chat-form">
+
+                <div class="chat-bubble bot-bubble">
+                    Hello. I’ll ask a few quick questions to help your doctor review your condition.
                 </div>
 
-                <div class="mb-3">
-                    <label class="form-label">How long have you had this symptom?</label>
+                <div class="chat-bubble bot-bubble">
+                    What is your main symptom?
+                </div>
+                <div class="chat-bubble user-input-bubble">
+                    <input type="text" name="mainSymptom" class="form-control custom-input" placeholder="e.g. chest pain, headache, cough" required>
+                </div>
+
+                <div class="chat-bubble bot-bubble">
+                    How long have you had this symptom?
+                </div>
+                <div class="chat-bubble user-input-bubble">
                     <input type="text" name="duration" class="form-control custom-input" placeholder="e.g. 2 days" required>
                 </div>
 
-                <div class="mb-3">
-                    <label class="form-label">Pain Level (0-10)</label>
-                    <input type="number" name="painLevel" min="0" max="10" class="form-control custom-input" required>
+                <div class="chat-bubble bot-bubble">
+                    On a scale of 0 to 10, what is your pain level?
+                </div>
+                <div class="chat-bubble user-input-bubble">
+                    <input type="number" name="painLevel" min="0" max="10" class="form-control custom-input" placeholder="0 to 10" required>
                 </div>
 
-                <div class="mb-3">
-                    <label class="form-label">Do you have difficulty breathing?</label>
+                <div class="chat-bubble bot-bubble">
+                    Are you having difficulty breathing?
+                </div>
+                <div class="chat-bubble user-input-bubble">
                     <select name="breathingDifficulty" class="form-select custom-select" required>
+                        <option value="">Select answer</option>
                         <option value="no">No</option>
                         <option value="yes">Yes</option>
                     </select>
                 </div>
 
-                <div class="mb-3">
-                    <label class="form-label">Do you have a fever?</label>
+                <div class="chat-bubble bot-bubble">
+                    Do you currently have a fever?
+                </div>
+                <div class="chat-bubble user-input-bubble">
                     <select name="fever" class="form-select custom-select" required>
+                        <option value="">Select answer</option>
                         <option value="no">No</option>
                         <option value="yes">Yes</option>
                     </select>
                 </div>
 
-                <button type="submit" class="btn btn-primary">Submit Triage</button>
+                <div class="text-end mt-4">
+                    <button type="submit" class="btn btn-primary btn-lg">
+                        Submit Triage
+                    </button>
+                </div>
+
             </form>
         </div>
     </div>

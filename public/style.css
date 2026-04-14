@@ -653,6 +653,94 @@ body {
     }
 }
 
+.triage-chat-card {
+    max-width: 850px;
+    margin: 0 auto;
+    background: #ffffff;
+    border-radius: 24px;
+    box-shadow: 0 14px 40px rgba(15, 23, 42, 0.08);
+    padding: 28px;
+}
+
+.chat-header {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding-bottom: 18px;
+    border-bottom: 1px solid #e5e7eb;
+    margin-bottom: 24px;
+}
+
+.chat-avatar {
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    background: #dbeafe;
+    color: #2563eb;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.3rem;
+}
+
+.chat-form {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.chat-bubble {
+    max-width: 80%;
+    padding: 14px 16px;
+    border-radius: 18px;
+    font-size: 0.98rem;
+    line-height: 1.6;
+}
+
+.bot-bubble {
+    background: #eff6ff;
+    color: #1e3a8a;
+    border-top-left-radius: 8px;
+    align-self: flex-start;
+}
+
+.user-input-bubble {
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-top-right-radius: 8px;
+    align-self: flex-end;
+    width: 100%;
+    max-width: 80%;
+}
+
+.user-input-bubble .form-control,
+.user-input-bubble .form-select {
+    border: none;
+    box-shadow: none;
+    background: transparent;
+}
+
+.user-input-bubble .form-control:focus,
+.user-input-bubble .form-select:focus {
+    box-shadow: none;
+    background: transparent;
+}
+
+@media (max-width: 768px) {
+    .triage-chat-card {
+        padding: 18px;
+    }
+
+    .chat-bubble,
+    .user-input-bubble {
+        max-width: 100%;
+    }
+
+    .chat-header {
+        align-items: flex-start;
+    }
+}
+
 .pagination .page-link {
     border-radius: 10px;
     margin: 0 4px;
